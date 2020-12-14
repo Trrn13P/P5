@@ -25,7 +25,7 @@ private:
     n = n_;
     tsteps = tsteps_;
 
-    //creating zero array for u
+    //creating zero array for u and unew
     u = unew = zeros(n+1);
   }
 

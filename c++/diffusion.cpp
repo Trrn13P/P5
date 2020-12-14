@@ -4,13 +4,16 @@
 #include <fstream>
 using namespace std;
 
+//one line pr timestep
 void diffusion::writetofile(ofstream &outfile, vec u){
   outfile << u.t();
 }
 
+//g(x) boundary function
 float diffusion::func(float x){
-  return x;
+  return 1;
 }
+
 
 void diffusion::backward_euler(){
   ofstream outfile("../textfiles/backward_euler.txt");
@@ -28,7 +31,9 @@ void diffusion::backward_euler(){
   tridiag_solver *solver;
   solver = new tridiag_solver(n,a,b,c);
 
+  //writing initial conditions
   writetofile(outfile,u);
+
   //going trough timesteps
   for (int t = 1; t <= tsteps; t++) {
     //forward-backward solve
