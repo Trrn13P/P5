@@ -4,6 +4,10 @@
 #include <fstream>
 using namespace std;
 
+void diffusion::writetofile(ofstream &outfile, vec u){
+  outfile << u.t();
+}
+
 float diffusion::func(float x){
   return x;
 }
@@ -15,7 +19,7 @@ void diffusion::backward_euler(){
 
   //Boundary conditions g(x)
   for (int i = 1; i < n+1; i++) {
-    unew(i) = u(i) = func(dx*i);
+    unew(i) = u(i) = func(dx*(i));
   }
   // Boundary conditions a(t) b(t) (zero here)
   unew(n) = u(n) = u(0) = unew(0) = 0;
@@ -36,7 +40,7 @@ void diffusion::backward_euler(){
 
 
     //print statement
-    outfile << u.t();
+
 
   }
   outfile.close();

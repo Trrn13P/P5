@@ -1,16 +1,19 @@
 #include <armadillo>
 using namespace arma;
 
+#include <fstream>
+using namespace std;
+
 #ifndef DIFFUSION_HPP
 #define DIFFUSION_HPP
 
 class diffusion {
 private:
+  //Setting up ints, floats
   float a ,b ,c;
-  //Setting up integers
   int n, tsteps;
-
   float dx, dt, alpha;
+
   //Setting up vectors
   vec u, unew;
 
@@ -22,16 +25,16 @@ private:
     n = n_;
     tsteps = tsteps_;
 
+    //creating zero array for u
     u = unew = zeros(n+1);
-
-    //Initializing x
-    //x_vec = linspace(0,1,n+1);
   }
-
 
 public:
   float func(float x);
   void backward_euler();
+
+
+  void writetofile(ofstream &outfile ,vec u_);
 
   //Initializing
   diffusion(int n_, int tsteps_, float dx_, float dt_){
