@@ -6,7 +6,7 @@ using namespace std;
 
   int main(int argc, char const *argv[]) {
     //Setting up parameters
-    int n = 10;
+    int n = 100;
     int tsteps = 1000;
     float dx = 1./(n+1);
     float alpha = 1./4;
@@ -16,5 +16,7 @@ using namespace std;
     diffusion *test;
     test = new diffusion(n, tsteps, dx, dt);
     test -> backward_euler();
+    test -> forward_euler();
+    test -> crank_nicolson();
     delete test;
   }

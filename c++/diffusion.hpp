@@ -32,7 +32,8 @@ private:
 public:
   float func(float x);
   void backward_euler();
-
+  void forward_euler();
+  void crank_nicolson();
 
   void writetofile(ofstream &outfile ,vec u_);
 

@@ -25,7 +25,7 @@ void tridiag_solver::backward_solver(vec &v_vec, vec &g_vec){
   v_vec(n) = g_tilde(n)*1./b_tilde(n);
 
   //Backward algorythm
-  for(int j=n-1;j>0;j--){
+  for(int j=n-1;j>=0;j--){
     v_vec(j) = (g_tilde(j) - a_tilde(j) *v_vec(j+1))*1./b_tilde(j);
   }
 }
