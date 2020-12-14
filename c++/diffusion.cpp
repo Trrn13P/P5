@@ -29,7 +29,7 @@ void diffusion::backward_euler(){
 
   //Setting up class pointer
   tridiag_solver *solver;
-  solver = new tridiag_solver(n,a,b,c);
+  solver = new tridiag_solver(n,a,b);
 
   //writing initial conditions
   writetofile(outfile,u);
@@ -43,7 +43,6 @@ void diffusion::backward_euler(){
     //setting boundary and updating u
     unew(0) = unew(n) = 0;
     u = unew;
-
 
     //print statement
     writetofile(outfile,u);

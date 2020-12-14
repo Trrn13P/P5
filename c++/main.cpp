@@ -7,7 +7,7 @@ using namespace std;
   int main(int argc, char const *argv[]) {
     //Setting up parameters
     int n = 10;
-    int tsteps = 100;
+    int tsteps = 1000;
     float dx = 1./(n+1);
     float alpha = 1./4;
     float dt = alpha*dx*dx;

@@ -6,20 +6,19 @@ using namespace arma;
 
 class tridiag_solver {
   private:
-    vec b_tilde ,c_tilde , g_tilde;
+    vec b_tilde ,a_tilde , g_tilde;
 
-    float a, b, c;
+    float a, b;
 
 
     int n;
-    void Initialize(int n_, float a_, float b_, float c_){
+    void Initialize(int n_, float a_, float b_){
       n = n_;
       a = a_;
       b = b_;
-      c = c_;
 
       //setting up the tilde vectors
-      b_tilde = c_tilde = g_tilde = zeros(n);
+      b_tilde = a_tilde = g_tilde = zeros(n+1);
     }
 
 public:
@@ -27,8 +26,8 @@ public:
   void backward_solver(vec &v_vec, vec &g_vec);
 
   //Initializing
-  tridiag_solver(int n_, float a_, float b_, float c_){
-    Initialize(n_, a_, b_, c_);
+  tridiag_solver(int n_, float a_, float b_){
+    Initialize(n_, a_, b_);
   }
 };
 
