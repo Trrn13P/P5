@@ -13,7 +13,7 @@ float diffusion::func(float x){
 }
 
 void diffusion::backward_euler(){
-  ofstream outfile("./test.txt");
+  ofstream outfile("../textfiles/backward_euler.txt");
   a = c = -alpha;
   b = (1+2*alpha);
 
@@ -28,6 +28,7 @@ void diffusion::backward_euler(){
   tridiag_solver *solver;
   solver = new tridiag_solver(n,a,b,c);
 
+  writetofile(outfile,u);
   //going trough timesteps
   for (int t = 1; t <= tsteps; t++) {
     //forward-backward solve
@@ -40,6 +41,7 @@ void diffusion::backward_euler(){
 
 
     //print statement
+    writetofile(outfile,u);
 
 
   }

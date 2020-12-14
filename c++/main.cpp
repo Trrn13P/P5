@@ -6,7 +6,7 @@ using namespace std;
 
   int main(int argc, char const *argv[]) {
     int n = 10;
-    int tsteps = 1;
+    int tsteps = 100;
     float dx = 1./(n+1);
     float alpha = 1./4;
     float dt = alpha*dx*dx;
