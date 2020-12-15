@@ -6,13 +6,15 @@ using namespace arma;
 
 class tridiag_solver {
   private:
+    //initializing tilde vectors
     vec b_tilde ,a_tilde , g_tilde;
 
+    //diagonal elements
     float a, b;
-
 
     int n;
     void Initialize(int n_, float a_, float b_){
+      //setting up length and diagonal elements
       n = n_;
       a = a_;
       b = b_;

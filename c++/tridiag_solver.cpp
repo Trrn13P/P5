@@ -1,7 +1,7 @@
 #include "tridiag_solver.hpp"
 
 /*
-THIS FORWARD SOLVER IS SPECIALIZED FOR EQUAL DIAGONAL ELEMENTS
+THIS FORWARD SOLVER IS SPECIALIZED FOR EQUAL DIAGONAL ELEMENTS a=c
 */
 
 void tridiag_solver::forward_solver(vec &v_vec, vec &g_vec){

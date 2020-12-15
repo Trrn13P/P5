@@ -4,21 +4,23 @@
 #include <fstream>
 using namespace std;
 
-//one line pr timestep
+//writing u(t_j) to file if this function is called
 void diffusion::writetofile(ofstream &outfile, vec u){
   outfile << u.t();
 }
 
-//g(x) boundary function
+//g(x) boundary function, set to 1 for easy comparrison with analytic solution
 float diffusion::func(float x){
   return 1;
 }
 
 
 void diffusion::forward_euler(){
+  //opening outfile and creating first lines for reading in python
   ofstream outfile("../textfiles/forward_euler.txt");
   outfile << "dt=" << dt << " saved_tsteps=" << saved_tsteps  <<" alpha=" << alpha <<" dx=" << dx << endl;
-  outfile << "u(t):, each new line is a new timestep * saved_tsteps" << endl;
+  outfile << "u(t):, each new line is a new timestep * (saved_tsteps+1)" << endl;
+  //setting diagonal elements
   a = alpha;
   b = (1-2*alpha);
 
@@ -29,12 +31,14 @@ void diffusion::forward_euler(){
   // Boundary conditions a(t) b(t) (zero here)
   unew(n) = u(n) = u(0) = unew(0) = 0;
 
-  //writing initial conditions
+  //writing initial conditions to file
   writetofile(outfile,u);
 
+  //k is a counter for knowing when to print to file
   int k = 0;
   //going trough timesteps
   for (int t = 1; t <= tsteps; t++) {
+    //going trough xsteps
     for (int i = 1; i < n; i++) {
     // Discretized diff eq
       unew(i) = alpha * u(i-1) + (1 - 2*alpha) * u(i) + alpha * u(i+1);
@@ -52,17 +56,16 @@ void diffusion::forward_euler(){
       k+=1;
     }
   }
+  //closing outfile
   outfile.close();
 }
 
-
-
-
-
 void diffusion::backward_euler(){
+  //opening outfile and creating first lines for reading in python
   ofstream outfile("../textfiles/backward_euler.txt");
   outfile << "dt=" << dt << " saved_tsteps=" << saved_tsteps  <<" alpha="<< alpha <<" dx=" << dx << endl;
   outfile << "u(t):, each new line is a new timestep * saved_tsteps" << endl;
+  //setting diagonal elements
   a = -alpha;
   b = (1+2*alpha);
 
@@ -83,7 +86,7 @@ void diffusion::backward_euler(){
   int k = 0;
   //going trough timesteps
   for (int t = 1; t <= tsteps; t++) {
-    //forward-backward solve
+    //forward-backward solving
     solver->forward_solver(unew,u);
     solver->backward_solver(unew,u);
 
@@ -100,14 +103,17 @@ void diffusion::backward_euler(){
       k+=1;
     }
   }
+  //closing outfile
   outfile.close();
   delete solver;
 }
 
 void diffusion::crank_nicolson(){
+  //opening outfile and creating first lines for reading in python
   ofstream outfile("../textfiles/crank_nicolson.txt");
   outfile << "dt=" << dt << " saved_tsteps=" << saved_tsteps  <<" alpha=" << alpha <<" dx=" << dx << endl;
   outfile << "u(t):, each new line is a new timestep * saved_tsteps" << endl;
+  //setting diagonal elements
   a = - alpha;
   b = 2 + 2*alpha;
 
@@ -140,6 +146,7 @@ void diffusion::crank_nicolson(){
   // Then solve the tridiagonal matrix
   solver -> forward_solver(u,r);
   solver -> backward_solver(u,r);
+  //setting boundary and updating r
   r = u;
   u(0) = 0;
   u(n) = 0;
@@ -155,6 +162,7 @@ void diffusion::crank_nicolson(){
 
 
   }
+  //closing outfile
   outfile.close();
   delete solver;
 }
