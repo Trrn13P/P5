@@ -17,6 +17,8 @@ float diffusion::func(float x){
 
 void diffusion::forward_euler(){
   ofstream outfile("../textfiles/forward_euler.txt");
+  outfile << "dt=" << dt << " saved_tsteps=" << saved_tsteps  <<" alpha=" << alpha <<" dx=" << dx << endl;
+  outfile << "u(t):, each new line is a new timestep * saved_tsteps" << endl;
   a = alpha;
   b = (1-2*alpha);
 
@@ -30,6 +32,7 @@ void diffusion::forward_euler(){
   //writing initial conditions
   writetofile(outfile,u);
 
+  int k = 0;
   //going trough timesteps
   for (int t = 1; t <= tsteps; t++) {
     for (int i = 1; i < n; i++) {
@@ -40,8 +43,14 @@ void diffusion::forward_euler(){
     unew(0) = unew(n) = 0;
     u = unew;
 
-    //print statement
-    writetofile(outfile,u);
+    //printing to file
+    if (k==saved_tsteps){
+      writetofile(outfile,u);
+      k=0;
+    }
+    else{
+      k+=1;
+    }
   }
   outfile.close();
 }
@@ -52,6 +61,8 @@ void diffusion::forward_euler(){
 
 void diffusion::backward_euler(){
   ofstream outfile("../textfiles/backward_euler.txt");
+  outfile << "dt=" << dt << " saved_tsteps=" << saved_tsteps  <<" alpha="<< alpha <<" dx=" << dx << endl;
+  outfile << "u(t):, each new line is a new timestep * saved_tsteps" << endl;
   a = -alpha;
   b = (1+2*alpha);
 
@@ -69,6 +80,7 @@ void diffusion::backward_euler(){
   //writing initial conditions
   writetofile(outfile,u);
 
+  int k = 0;
   //going trough timesteps
   for (int t = 1; t <= tsteps; t++) {
     //forward-backward solve
@@ -79,8 +91,14 @@ void diffusion::backward_euler(){
     unew(0) = unew(n) = 0;
     u = unew;
 
-    //print statement
-    writetofile(outfile,u);
+    //printing to file
+    if (k==saved_tsteps){
+      writetofile(outfile,u);
+      k=0;
+    }
+    else{
+      k+=1;
+    }
   }
   outfile.close();
   delete solver;
@@ -88,6 +106,8 @@ void diffusion::backward_euler(){
 
 void diffusion::crank_nicolson(){
   ofstream outfile("../textfiles/crank_nicolson.txt");
+  outfile << "dt=" << dt << " saved_tsteps=" << saved_tsteps  <<" alpha=" << alpha <<" dx=" << dx << endl;
+  outfile << "u(t):, each new line is a new timestep * saved_tsteps" << endl;
   a = - alpha;
   b = 2 + 2*alpha;
 
@@ -108,6 +128,7 @@ void diffusion::crank_nicolson(){
   tridiag_solver *solver;
   solver = new tridiag_solver(n,a,b);
 
+  int k = 0;
   // Time iteration
   for (int t = 1; t <= tsteps; t++) {
     // Calculate r for use in tridag, right hand side of the Crank Nicolson method
@@ -122,8 +143,17 @@ void diffusion::crank_nicolson(){
   r = u;
   u(0) = 0;
   u(n) = 0;
-  // Eventual print statements etc
-  writetofile(outfile,u);
+
+  //printing to file
+  if (k==saved_tsteps){
+    writetofile(outfile,u);
+    k=0;
+  }
+  else{
+    k+=1;
+  }
+
+
   }
   outfile.close();
   delete solver;
