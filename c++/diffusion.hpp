@@ -36,7 +36,10 @@ public:
   void forward_euler();
   void crank_nicolson();
 
+  void forward_2d();
+
   void writetofile(ofstream &outfile ,vec u_);
+  void writetofile2d(ofstream &outfile, mat u_);
 
   //Initializing
   diffusion(int n_, int tsteps_,int saved_tsteps_, float dx_, float dt_){

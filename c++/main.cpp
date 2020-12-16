@@ -6,18 +6,19 @@ using namespace std;
 
   int main(int argc, char const *argv[]) {
     //Setting up parameters
-    int n = 9;
-    int tsteps = 1000;
-    int saved_tsteps =10;
+    int n = 20;
+    int tsteps = 10000;
+    int saved_tsteps =100;
     float dx = 1./(n+1);
-    float alpha = 1./2;
+    float alpha = 1./4;
     float dt = alpha*dx*dx;
 
     //Solving equation with set parameters
     diffusion *test;
     test = new diffusion(n ,tsteps ,saved_tsteps, dx, dt);
-    test -> backward_euler();
-    test -> forward_euler();
-    test -> crank_nicolson();
+    //test -> backward_euler();
+    //test -> forward_euler();
+    //test -> crank_nicolson();
+    test -> forward_2d();
     delete test;
   }
