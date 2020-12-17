@@ -3,7 +3,8 @@ LIB = -larmadillo -llapack -lblas
 CPPflags= g++ -std=c++14
 
 # n, tsteps, saved_tsteps, alpha, type
-CONDITIONS = 10 100 5 1./4 1d
+#make sure alpha is a decimal point number, 0.25, not 1/4 for ex.
+CONDITIONS = 10 100 5 0.25 1d
 
 all: compile execute
 
