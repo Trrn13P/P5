@@ -19,7 +19,7 @@ using namespace std;
       tsteps = atoi(argv[2]);
       //number of saved timesteps, 0 for saving all. 1 for saving every second
       saved_tsteps = atoi(argv[3]);
-      alpha = atoi(argv[4]);
+      alpha = atof(argv[4]);
       //type can be 1d or 2d
       type = argv[5];
     }
