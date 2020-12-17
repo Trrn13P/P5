@@ -42,7 +42,7 @@ for filename in filenames:
     #setting up array for x
     n = len(u[0])-1
     x = np.linspace(0,1,n+1)
-    t_val = dt*(saved_tsteps+1)
+    t_val = dt*(saved_tsteps+1)*len(u)
     t = np.linspace(0,t_val,len(u))
     scheme = filename[13:].split(".")[0].split("_")[0]
 
