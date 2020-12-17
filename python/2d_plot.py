@@ -31,7 +31,8 @@ for filename in filenames:
 
     #plotting for different t-values
     scheme = filename[13:].split(".")[0].split("_")[0]
-    for index in [5,10]:
+    timestep_numbers = [5,10]
+    for index in timestep_numbers:
         plt.plot(x,u[index],label=scheme+", t="+str(index*dt*(saved_tsteps+1)) + "s")
 
 #saving file
