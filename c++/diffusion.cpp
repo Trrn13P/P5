@@ -46,7 +46,7 @@ void diffusion::forward_euler(){
     //going trough xsteps
     for (int i = 1; i < n; i++) {
     // Discretized diff eq
-      unew(i) = alpha * u(i-1) + (1 - 2*alpha) * u(i) + alpha * u(i+1);
+      unew(i) = a * u(i-1) + b * u(i) + a * u(i+1);
     }
     //setting boundary and updating u
     unew(0) = unew(n) = 0;
@@ -152,7 +152,7 @@ void diffusion::crank_nicolson(){
     solver -> forward_solver(u,r);
     solver -> backward_solver(u,r);
     //setting boundary and updating r
-    r = u;
+    //r = u;
     u(0) = 0;
     u(n) = 0;
 
@@ -218,7 +218,7 @@ void diffusion::forward_2d(){
 
     //printing to file
     if (k==saved_tsteps){
-      writetofile2d(outfile,u);
+      writetofile2d(outfile,u_);
       k=0;
     }
     else{

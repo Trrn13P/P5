@@ -19,7 +19,6 @@ void tridiag_solver::forward_solver(vec &v_vec, vec &g_vec){
   }
 }
 
-
 void tridiag_solver::backward_solver(vec &v_vec, vec &g_vec){
   //Setting up the endpoint
   v_vec(n) = g_tilde(n)*1./b_tilde(n);

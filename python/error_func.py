@@ -80,4 +80,5 @@ plt.legend()
 #saving to png
 dir = "../figures/d/"
 filename_ = "n=" + str(n) + ",dt=" + str(dt) +",dx=" +str(dx)+ ", epsilon, M=" +str(m_max) + ",T="+str(t[-1])
-plt.savefig(dir+filename_+".png")
+#plt.savefig(dir+filename_+".png")
+plt.show()
