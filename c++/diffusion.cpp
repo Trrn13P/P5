@@ -20,6 +20,7 @@ float diffusion::func(float x){
 }
 
 
+
 void diffusion::forward_euler(){
   //opening outfile and creating first lines for reading in python
   ofstream outfile("../textfiles/forward_euler.txt");
